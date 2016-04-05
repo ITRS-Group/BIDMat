@@ -16,8 +16,7 @@ object Dependencies {
   val scala_reflect = "org.scala-lang" % "scala-reflect" % "2.11.7"
   val scala_compiler = "org.scala-lang" % "scala-compiler" % "2.11.7"
   val scala_library = "org.scala-lang" % "scala-library" % "2.11.7"
-  val scala_parser_combinators = "org.scala-lang" % "scala-parser-combinators" % "2.11.0-M4"
-  val scalaList = Seq(scala_reflect, scala_compiler, scala_library)//, scala_parser_combinators)
+  val scalaList = Seq(scala_reflect, scala_compiler, scala_library)
 
   val lz4 = "net.jpountz.lz4" % "lz4" % "1.3"
   val jline = "jline" % "jline" % "2.10"
