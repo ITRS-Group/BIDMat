@@ -5,7 +5,7 @@ import ncsa.hdf.hdf5lib.HDF5Constants._
 import scala.reflect._
 
 object MatHDF5 {
-  
+
   var refcount:Long = -1;
 
   def setCompressionPlist(dplist_id:Int, dims:Array[Long]) = {
@@ -37,7 +37,7 @@ object MatHDF5 {
   	}
   }
 
-  def getStringAttr(id:Int, obj_name:String, attr_name:String):String = { 
+  def getStringAttr(id:Int, obj_name:String, attr_name:String):String = {
   	val attr_id = H5Aopen_by_name(id, obj_name, attr_name, H5P_DEFAULT, H5P_DEFAULT);
   	val attr_type_id = H5Aget_type(attr_id);
   	val attr_type_size = H5Tget_size(attr_type_id);
@@ -48,7 +48,7 @@ object MatHDF5 {
   	new String(sbuf).trim();
   }
 
-  def putStringAttr(id:Int, attr_name:String, attr_val:String) = { 
+  def putStringAttr(id:Int, attr_name:String, attr_val:String) = {
   	val space_id = H5Screate(H5S_SCALAR);
   	val memtype_id = H5Tcopy(H5T_FORTRAN_S1);
   	H5Tset_size(memtype_id, attr_val.length());
@@ -59,7 +59,7 @@ object MatHDF5 {
   	H5Sclose(space_id);
   }
 
-  def getLongAttr(id:Int, obj_name:String, attr_name:String):Long = { 
+  def getLongAttr(id:Int, obj_name:String, attr_name:String):Long = {
   	val attr_id = H5Aopen_by_name(id, obj_name, attr_name, H5P_DEFAULT, H5P_DEFAULT);
   	val attr_type_id = H5Aget_type(attr_id);
   	val attr_type_size = H5Tget_size(attr_type_id);
@@ -70,7 +70,7 @@ object MatHDF5 {
   	sbuf(0)
   }
 
-  def putIntAttr(id:Int, attr_name:String, attr_val:Int) = { 
+  def putIntAttr(id:Int, attr_name:String, attr_val:Int) = {
   	val space_id = H5Screate(H5S_SCALAR);
   	val attr_id = H5Acreate(id, attr_name, H5T_NATIVE_INT, space_id, H5P_DEFAULT, H5P_DEFAULT);
   	val lbuf = Array[Int](1);
@@ -80,7 +80,7 @@ object MatHDF5 {
   	H5Sclose(space_id);
   }
 
-  def putLongAttr(id:Int, attr_name:String, attr_val:Long) = { 
+  def putLongAttr(id:Int, attr_name:String, attr_val:Long) = {
   	val space_id = H5Screate(H5S_SCALAR);
   	val attr_id = H5Acreate(id, attr_name, H5T_NATIVE_LLONG, space_id, H5P_DEFAULT, H5P_DEFAULT);
   	val lbuf = Array[Long](1);
@@ -90,7 +90,7 @@ object MatHDF5 {
   	H5Sclose(space_id)
   }
 
-  def putByteAttr(id:Int, attr_name:String, attr_val:Byte) = { 
+  def putByteAttr(id:Int, attr_name:String, attr_val:Byte) = {
   	val space_id = H5Screate(H5S_SCALAR);
   	val attr_id = H5Acreate(id, attr_name, H5T_NATIVE_UCHAR, space_id, H5P_DEFAULT, H5P_DEFAULT);
   	val lbuf = Array[Byte](1);
@@ -100,7 +100,7 @@ object MatHDF5 {
   	H5Sclose(space_id)
   }
 
-  def getMatDims(data_id:Int):Array[Long] = { 
+  def getMatDims(data_id:Int):Array[Long] = {
   	val space_id = H5Dget_space(data_id);
   	val ndims = H5Sget_simple_extent_ndims(space_id);
   	val dims = new Array[Long](ndims);
@@ -109,7 +109,7 @@ object MatHDF5 {
   	dims;
   }
 
-  def readMatDims(fid:Int, varname:String):Array[Long] = { 
+  def readMatDims(fid:Int, varname:String):Array[Long] = {
   	val data_id = H5Dopen(fid, varname, H5P_DEFAULT);
   	val dims = getMatDims(data_id);
   	H5Dclose(data_id);
@@ -292,7 +292,7 @@ object MatHDF5 {
         H5Tclose(tid);
         H5Dclose(did);
         data_type match {
-          case H5T_FLOAT => 
+          case H5T_FLOAT =>
           if (data_size == 4) {
         	  if (readMatDims(fid, varname).length <= 2) {
         		  FMat(getDenseMat[Float](fid, varname, H5T_FLOAT, 4));
@@ -300,15 +300,15 @@ object MatHDF5 {
         		  getFND(fid, varname, H5T_FLOAT, 4);
         	  }
           } else if (data_size == 8) {
-        	  DMat(getDenseMat[Double](fid, varname, H5T_FLOAT, 8));              
+        	  DMat(getDenseMat[Double](fid, varname, H5T_FLOAT, 8));
           } else {
             throw new RuntimeException("load: HDF5 %d-byte float type not supported" format data_size)
           }
-          case H5T_INTEGER => 
+          case H5T_INTEGER =>
           if (data_size == 4) {
         	  IMat(getDenseMat[Int](fid, varname, H5T_INTEGER, 4));
           } else if (data_size == 8) {
-            LMat(getDenseMat[Long](fid, varname, H5T_INTEGER, 8));              
+            LMat(getDenseMat[Long](fid, varname, H5T_INTEGER, 8));
           } else {
             throw new RuntimeException("load: HDF5 %d-byte int type not supported" format data_size)
           }
@@ -318,7 +318,7 @@ object MatHDF5 {
     } else {
       throw new RuntimeException("getMat couldnt open file");
     }
-    
+
   }
 
   def writeMatHeader(fname:String) = {
@@ -389,7 +389,7 @@ object MatHDF5 {
 
   def putCellMat(fid:Int, varname:String, a:CSMat) = {
   	var group_id = 0;
-  	if (refcount < 0) { 
+  	if (refcount < 0) {
   		group_id = H5Gcreate(fid, "/#refs#", H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
   		putEmptyRef(group_id);
   		refcount = 1;
@@ -476,7 +476,7 @@ object MatHDF5 {
   	ref
   }
 
-  def putMatString(id:Int, varname:String, str:String):Array[Byte] = { 
+  def putMatString(id:Int, varname:String, str:String):Array[Byte] = {
   	val dims = new Array[Long](2);
   	dims(0) = str.length;
   	dims(1) = 1;
@@ -495,8 +495,8 @@ object MatHDF5 {
   	ref
   }
 
-  def putMat(fid:Int, a:AnyRef, aname:String):Array[Byte] = { 
-  	a match { 
+  def putMat(fid:Int, a:AnyRef, aname:String):Array[Byte] = {
+  	a match {
   	case aa:DMat => putDenseMat[Double](fid, aa, aname, H5T_NATIVE_DOUBLE, "double")
   	case aa:FMat => putDenseMat[Float](fid, aa, aname, H5T_NATIVE_FLOAT, "single")
   	case aa:IMat => putDenseMat[Int](fid, aa, aname, H5T_NATIVE_INT, "int32")
@@ -509,7 +509,7 @@ object MatHDF5 {
   	case _ => throw new RuntimeException("unsupported matrix type to save")
   	}
   }
-  
+
   def h5list(fname:String):CSMat = {
 	  val fapl = H5Pcreate(H5P_FILE_ACCESS);
 	  val fid = H5Fopen(fname,H5F_ACC_RDONLY,fapl);
@@ -518,7 +518,7 @@ object MatHDF5 {
     val cs = CSMat(n, 1);
     for (i <- 0 until n) {
       cs(i) = H5Lget_name_by_idx(fid, "/", H5_INDEX_NAME, H5_ITER_INC, i, H5P_DEFAULT)
-    } 
+    }
 	  H5Fclose(fid);
 	  H5Pclose(fapl);
     cs

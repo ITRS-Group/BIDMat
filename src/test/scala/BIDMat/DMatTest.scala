@@ -23,7 +23,7 @@ class DMatTest extends FunSuite with Checkers {
 	System.arraycopy(xxvalues, 0, xx.data, 0, 12)
 	
   test("DMat fill") {
-    assert(x(0,0) == 1.0);
+    assert(x(0,0) == 1.0)
     assert(x(1,0) == 2.0);
     assert(x(0,1) == 3.0);
     assert(x(1,1) == 4.0);
