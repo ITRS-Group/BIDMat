@@ -22,27 +22,19 @@ object Dependencies {
   val jline = "jline" % "jline" % "2.10"
 
   val jcuda = "com.itrsgroup" % "valo-jcuda" % "0.7.5"
-  val jcuda_windows = "com.itrsgroup" % "valo-jcuda-windows" % "0.7.5"
   val jcublas = "com.itrsgroup" % "valo-jcublas" % "0.7.5"
-  val jcublas_windows = "com.itrsgroup" % "valo-jcublas-windows" % "0.7.5"
   val jcudavec = "com.itrsgroup" % "valo-jcudavec" % "0.7.5"
   val jcufft = "com.itrsgroup" % "valo-jcufft" % "0.7.5"
-  val jcufft_windows = "com.itrsgroup" % "valo-jcufft-windows" % "0.7.5"
   val jcurand = "com.itrsgroup" % "valo-jcurand" % "0.7.5"
-  val jcurand_windows = "com.itrsgroup" % "valo-jcurand-windows" % "0.7.5"
   val jcusolver = "com.itrsgroup" % "valo-jcusolver" % "0.7.5"
-  val jcusolver_windows = "com.itrsgroup" % "valo-jcusolver-windows" % "0.7.5"
   val jcusparse = "com.itrsgroup" % "valo-jcusparse" % "0.7.5"
-  val jcusparse_windows = "com.itrsgroup" % "valo-jcusparse-windows" % "0.7.5"
+  val jcudaNatives = Seq(
+    "com.itrsgroup" % "valo-jcuda-natives-linux" % "0.7.5",
+    "com.itrsgroup" % "valo-jcuda-natives-windows" % "0.7.5",
+    "com.itrsgroup" % "valo-jcuda-natives-osx" % "0.7.5"
+    )
 
-  val jcudaList = Seq(
-    jcuda, jcuda_windows,
-    jcublas, jcublas_windows,
-    jcudavec,
-    jcufft, jcufft_windows,
-    jcurand, jcurand_windows,
-    jcusolver, jcusolver_windows,
-    jcusparse, jcusparse_windows)
+  val jcudaList = jcudaNatives ++ Seq(jcuda, jcublas, jcudavec, jcufft, jcurand, jcusolver, jcusparse)
 
   val commons_math = "org.apache.commons" % "commons-math3" % "3.2"
 
@@ -53,5 +45,11 @@ object Dependencies {
   val scala_check = "org.scalacheck" %% "scalacheck" % "1.11.6" % "test"
   val testList = Seq(scala_test, junit, scala_check)
 
-  val bidmat_dependencies = Seq(lz4, jline, commons_math, hdf) ++ jcudaList ++ scalaList ++ testList
+  val bidmat_natives = Seq (
+    "com.itrsgroup" % "valo-bidmat-natives-windows" % "1.0.4",
+    "com.itrsgroup" % "valo-bidmat-natives-linux" % "1.0.4",
+    "com.itrsgroup" % "valo-bidmat-natives-osx" % "1.0.4"
+  )
+
+  val bidmat_dependencies = bidmat_natives ++ Seq(lz4, jline, commons_math, hdf) ++ jcudaList ++ scalaList ++ testList
 }

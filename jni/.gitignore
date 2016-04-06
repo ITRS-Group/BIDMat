@@ -1,0 +1,5 @@
+valo*/
+target/
+project/target
+src/Makefile.incl
+lib/

@@ -23,14 +23,14 @@ object TheBuild extends Build {
     organization := "com.itrsgroup",
     crossPaths := false,
     scalaVersion := "2.11.5",
-    version := "1.1.0",
+    version := "1.0.4",
 
     scalacOptions ++= Seq("-encoding", "UTF-8", "-deprecation", "-unchecked", "-feature", "-language:postfixOps", "-target:jvm-1.7"),
     javacOptions in (Compile, compile) ++= Seq("-Xlint:unchecked", "-Xlint:deprecation", "-source", "1.8", "-target", "1.8"),
 
     publishTo := Some("repo" at publishRepo(version.value)),
     credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
-  )
+  ) ++ Dependencies.resolvers
 
   lazy val BIDMatProject = Project("valo-bidmat", file("."),
     settings = baseSettings ++ Seq (
