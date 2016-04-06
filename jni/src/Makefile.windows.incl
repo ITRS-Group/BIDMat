@@ -1,0 +1,26 @@
+CC=C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2016.2.180\windows\bin\intel64\icl.exe
+GCC=cl
+NVCC=nvcc
+NVCCFLAGS=-c -use_fast_math  -Ic:/Development/BIDMat/jni/include           -gencode arch=compute_20,code=sm_20           -gencode arch=compute_30,code=sm_30           -gencode arch=compute_35,code=sm_35           -gencode arch=compute_50,code=sm_50           -gencode arch=compute_52,code=sm_52           --machine 64  -Xcompiler "/EHsc /W3 /nologo /O2 /Zi /wd4244 /wd4267 /wd4503 /MT"
+SUBLIB=
+OBJ=obj
+OUTFLG=/OUT:
+CPPFLAGS=/c /MT /DNDEBUG /O2 /EHsc 
+CFLAGS=/c /MT /DNDEBUG /O2 /EHsc 
+LB=lib
+LD=link
+GLD=link
+LDFLAGS=/DLL /MACHINE:amd64  /NODEFAULTLIB:vcomp.lib /ignore:4217
+LIBPREPEND=
+LIBAPPEND=-windows-x86_64.dll
+LIBAPPENDLIB=-windows-x86_64.lib
+LAPACK_INCLUDES=
+CPU_LIBS=mkl_intel_lp64.lib mkl_intel_thread.lib mkl_core.lib libiomp5md.lib
+CUDA_LIBS=cudart.lib cublas.lib
+RANDSRC=VSL
+FORTRAN_LIBS=
+FC=ifort
+FFLAGS=-c 
+LIB=C:\Program Files (x86)\IntelSWTools\compilers_and_libraries\windows\compiler\lib;C:\Program Files (x86)\IntelSWTools\compilers_and_libraries\windows\compiler\lib\intel64;C:\Program Files (x86)\IntelSWTools\compilers_and_libraries\windows\compiler\lib\intel64_win;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\LIB\amd64;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\LIB\amd64;C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x64;C:\Program Files (x86)\IntelSWTools\compilers_and_libraries\windows\tbb\lib\intel64\vc_mt;C:\Program Files (x86)\IntelSWTools\compilers_and_libraries\windows\mkl\lib\intel64;C:\Program Files (x86)\IntelSWTools\compilers_and_libraries\windows\compiler\lib\intel64;C:\Program Files\Java\jdk1.8.0_65/lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5/lib/x64;c:/Development/BIDMat/lib;
+INSTALL_DIR=c:/Development/BIDMat/lib
+INCLUDE=C:\Program Files (x86)\IntelSWTools\compilers_and_libraries\windows\compiler\include;C:\Program Files (x86)\IntelSWTools\compilers_and_libraries\windows\compiler\include\intel64;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\INCLUDE;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE;C:\Program Files (x86)\Windows Kits\8.1\include\shared;C:\Program Files (x86)\Windows Kits\8.1\include\um;C:\Program Files (x86)\Windows Kits\8.1\include\winrt;C:\Program Files (x86)\IntelSWTools\compilers_and_libraries\windows\mkl\include;C:\Program Files\Java\jdk1.8.0_65\include;C:\Program Files\Java\jdk1.8.0_65\include/win32;C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2016.2.180\windows\mkl/include;c:/Development/BIDMat/jni/include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5/include;
